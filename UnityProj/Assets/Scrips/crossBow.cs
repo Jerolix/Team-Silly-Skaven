@@ -10,7 +10,7 @@ public class crossBow : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonUp(0))
         {
             var Bolt = Instantiate(boltPrefab, boltSpawnPoint.position, boltSpawnPoint.rotation);//gets the bolt to appear and where it should appear, the origin point of the crossbow
             Bolt.GetComponent<Rigidbody>().velocity = boltSpawnPoint.forward * boltSpeed;//get bolt to move.

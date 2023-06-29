@@ -15,6 +15,7 @@ public class StartGame : MonoBehaviour
         btn.onClick.AddListener(TaskOnClick);
     }
 
+
     // Update is called once per frame
     void TaskOnClick()
     {

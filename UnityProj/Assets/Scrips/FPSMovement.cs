@@ -67,7 +67,7 @@ public class FPSMovement : MonoBehaviour
         m_charController.Move(move * m_finalSpeed * Time.deltaTime); // Stuff from WASD
         m_velocity.y += (1.2f * m_gravity) * Time.deltaTime; // Gravity calculation
         m_charController.Move(m_velocity * Time.deltaTime); // Vertical movement
-        Debug.Log(m_velocity.y);
+       // Debug.Log(m_velocity.y);
     }
 
     void RunCheck()
