@@ -28,6 +28,13 @@ public class FPSMovement : MonoBehaviour
     public bool m_isGrounded;
     public bool isFalling;
 
+    public bool isSprinting = false;
+    public bool isWalking = false;
+    public bool isJumping = false;
+
+    public AudioSource walkSound;
+    public AudioSource sprintSound;
+
 
 
     // Start is called before the first frame update
@@ -56,31 +63,97 @@ public class FPSMovement : MonoBehaviour
         if (Input.GetKey(m_forward) || Input.GetKey(m_back) || Input.GetKey(m_left) || Input.GetKey(m_right))
         {
             move = transform.right * x + transform.forward * z; //move vector asshole
+            if (isSprinting == false && isWalking == false)
+            {
+                isWalking = true;
+            }
+            else if (isSprinting == true && isWalking == true)
+            {
+                isWalking = false;
+            }
         }
+       // print(move);
         MovePlayer(move);
-        RunCheck();
+        RunCheck(move);
         JumpCheck(); //check we jumpy jump
+        PlaySounds();
     }
 
     void MovePlayer(Vector3 move)
     {
+        if (move == Vector3.zero && isWalking == true)
+        {
+            isWalking = false;
+        }
         m_charController.Move(move * m_finalSpeed * Time.deltaTime); // Stuff from WASD
         m_velocity.y += (1.2f * m_gravity) * Time.deltaTime; // Gravity calculation
         m_charController.Move(m_velocity * Time.deltaTime); // Vertical movement
        // Debug.Log(m_velocity.y);
     }
 
-    void RunCheck()
+    void RunCheck(Vector3 move)
     {
         if (Input.GetKeyDown(m_sprint))
         {
-            m_finalSpeed = m_movementSpeed * m_runSpeed;
+            if (move != Vector3.zero)
+            {
+                isSprinting = true;
+                m_finalSpeed = m_movementSpeed * m_runSpeed;
+            }
         }
         else if (Input.GetKeyUp(m_sprint))
         {
+
+             isSprinting = false;
             m_finalSpeed = m_movementSpeed;
         }
+        
+        if (move == Vector3.zero)
+        {
+            isSprinting = false;
+            m_finalSpeed = m_movementSpeed;
+        }
+    }
 
+    void PlaySounds()
+    {
+        if (isSprinting == false)
+        {
+            if (sprintSound.isPlaying == true)
+            {
+                sprintSound.Pause();
+                print("Not Sprinting");
+            }
+        }
+        else if (isSprinting == true)
+        {
+            if (sprintSound.isPlaying == false)
+            {
+                sprintSound.Play();
+                if (walkSound.isPlaying == true)
+                {
+                    walkSound.Pause();
+                }
+                print("Sprinting");
+            }
+        }
+
+        if (isWalking == false)
+        {
+            if (walkSound.isPlaying == true)
+            {
+                walkSound.Pause();
+                print("Not Walking");
+            }
+        }
+        else if (isWalking == true && isSprinting == false)
+        {
+            if (walkSound.isPlaying == false)
+            {
+                walkSound.Play();
+                print("Walking");
+            }
+        }
     }
 
     void JumpCheck()

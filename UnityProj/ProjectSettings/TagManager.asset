@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Prop
   - Bolt
+  - Clock
   layers:
   - Default
   - TransparentFX
