@@ -25,6 +25,7 @@ public class boltStatus : MonoBehaviour
             transform.parent = Collider.gameObject.transform;
             isHit = true;
             StartCoroutine(HitProp());
+
             print("Hit Prop");
         }
     }
