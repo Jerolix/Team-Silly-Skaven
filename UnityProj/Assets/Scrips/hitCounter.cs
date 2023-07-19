@@ -8,6 +8,7 @@ public class hitCounter : MonoBehaviour
 {
     public int targetsHit = 0;
     public TextMeshProUGUI scoreText;
+    public Animator counterAnimator;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +20,7 @@ public class hitCounter : MonoBehaviour
     {
         if (scoreText.text != "Targets Hit: " + targetsHit)
         {
+            counterAnimator.SetTrigger("ValueChanged");
             scoreText.text = "Targets Hit: " + targetsHit;
         }
     }
