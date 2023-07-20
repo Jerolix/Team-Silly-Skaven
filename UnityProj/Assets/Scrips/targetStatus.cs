@@ -16,6 +16,7 @@ public class targetStatus : MonoBehaviour
     void Start()
     {
         counterInt = scoreText.GetComponent<hitCounter>();
+        woodImpact = gameObject.GetComponent<AudioSource>();
     }
 
     void UpdateCounter()
@@ -32,7 +33,7 @@ public class targetStatus : MonoBehaviour
             UpdateCounter();
             if (woodImpact.isPlaying == false)
             {
-                woodImpact.pitch = Random.Range(0.75f, 1.5f);
+                woodImpact.pitch = Random.Range(0.5f, 1.5f);
                 woodImpact.Play();
             }
             print("Hit by Bolt");
@@ -43,7 +44,7 @@ public class targetStatus : MonoBehaviour
             UpdateCounter();
             if (woodImpact.isPlaying == false)
             {
-                woodImpact.pitch = Random.Range(0.75f, 1.5f);
+                woodImpact.pitch = Random.Range(0.5f, 1.5f);
                 woodImpact.Play();
             }
             print("Hit by Prop");
@@ -52,7 +53,7 @@ public class targetStatus : MonoBehaviour
         {
             if (woodImpact.isPlaying == false)
             {
-                woodImpact.pitch = Random.Range(0.75f, 1.5f);
+                woodImpact.pitch = Random.Range(0.5f, 1.5f);
                 woodImpact.Play();
             }
         }
