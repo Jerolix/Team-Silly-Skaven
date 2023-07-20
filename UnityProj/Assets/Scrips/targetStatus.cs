@@ -9,6 +9,8 @@ public class targetStatus : MonoBehaviour
     public bool isHit = false;
     public TextMeshProUGUI scoreText;
     private hitCounter counterInt;
+    public AudioSource woodImpact;
+    public AudioSource pingEffect;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +20,7 @@ public class targetStatus : MonoBehaviour
 
     void UpdateCounter()
     {
+        pingEffect.Play();
         counterInt.targetsHit++;
     }
 
@@ -27,14 +30,31 @@ public class targetStatus : MonoBehaviour
         {
             isHit = true;
             UpdateCounter();
+            if (woodImpact.isPlaying == false)
+            {
+                woodImpact.pitch = Random.Range(0.75f, 1.5f);
+                woodImpact.Play();
+            }
             print("Hit by Bolt");
         }
         if (isHit == false && Collider.gameObject.tag == "Prop")
         {
             isHit = true;
             UpdateCounter();
-
+            if (woodImpact.isPlaying == false)
+            {
+                woodImpact.pitch = Random.Range(0.75f, 1.5f);
+                woodImpact.Play();
+            }
             print("Hit by Prop");
+        }
+        else
+        {
+            if (woodImpact.isPlaying == false)
+            {
+                woodImpact.pitch = Random.Range(0.75f, 1.5f);
+                woodImpact.Play();
+            }
         }
     }
 

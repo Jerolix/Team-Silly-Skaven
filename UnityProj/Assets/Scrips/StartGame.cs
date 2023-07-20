@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class StartGame : MonoBehaviour
 {
     public Button startButton;
+    public AudioSource clickSound;
+    public Animator fadeScreenController;
 
     // Start is called before the first frame update
     void Start()
@@ -15,10 +17,16 @@ public class StartGame : MonoBehaviour
         btn.onClick.AddListener(TaskOnClick);
     }
 
+    IEnumerator coroutineA()
+    {
+        fadeScreenController.SetTrigger("FadeBlack");
+        yield return new WaitForSeconds(1.0f);
+        SceneManager.LoadScene("SampleScene");
+    }
 
     // Update is called once per frame
     void TaskOnClick()
     {
-        SceneManager.LoadScene("SampleScene");
+        StartCoroutine(coroutineA());
     }
 }
