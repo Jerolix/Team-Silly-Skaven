@@ -35,6 +35,8 @@ public class FPSMovement : MonoBehaviour
     public AudioSource walkSound;
     public AudioSource sprintSound;
 
+    public AudioSource clockBell;
+
 
 
     // Start is called before the first frame update
@@ -182,6 +184,13 @@ public class FPSMovement : MonoBehaviour
         return isGrounded;
     }
 
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.tag == "Clock")
+        {
+            clockBell.Play();
+        }
+    }
 
 }
 
