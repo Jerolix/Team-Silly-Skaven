@@ -12,6 +12,7 @@ public class crossBow : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip CrossbowV2Shoot;
     public AudioClip CrossbowV2Reload;
+    public AudioClip CrossbowV2SafetyOff;
 
     private void Start()
     {
@@ -26,15 +27,16 @@ public class crossBow : MonoBehaviour
 
     void Update()
     {
-       /* if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             if (canFire == true)
             {
                 {
-                    bowAnimator.SetTrigger("Retracting");
+                    audioSource.PlayOneShot(CrossbowV2SafetyOff, 1.0f);
                 }
             }
-        }*/
+        }
+
         if (Input.GetMouseButtonUp(0))
         {
             if (canFire == true) 
