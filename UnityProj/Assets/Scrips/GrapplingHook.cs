@@ -16,6 +16,10 @@ public class GrapplingHook : MonoBehaviour
     private bool isShooting, isGrappling;
     private Vector3 hookPoint;
 
+    public AudioSource grappleShoot;
+    public AudioSource reelIn;
+    //public AudioClip playerGrappleMove;
+
     private void Start()
     {
         isShooting = false;
@@ -41,7 +45,7 @@ public class GrapplingHook : MonoBehaviour
             grapplingHook.position = Vector3.Lerp(grapplingHook.position, hookPoint, hookSpeed * Time.deltaTime);
             if(Vector3.Distance(grapplingHook.position, hookPoint) < 0.5f)
             {
-                controller.enabled = false; //This disables your character controller while grappling
+                controller.enabled = false; //This disables your character controller while grappling 
                 playerBody.position = Vector3.Lerp(playerBody.position, hookPoint - offset, hookSpeed * Time.deltaTime);
                 if (Vector3.Distance(playerBody.position, hookPoint -offset) < 0.5f) //Grappling hook launching speed check for if you can disable your character.
                 {
@@ -53,6 +57,12 @@ public class GrapplingHook : MonoBehaviour
 
             
         }
+    }
+
+    public IEnumerator ReelIn()
+    {
+        yield return new WaitForSeconds (0.5f);
+        reelIn.Play();
     }
 
     private void ShootHook()
@@ -68,8 +78,12 @@ public class GrapplingHook : MonoBehaviour
             isGrappling = true;
             grapplingHook.parent = null;
             grapplingHook.LookAt(hookPoint);
+            grappleShoot.Play();
+            StartCoroutine(ReelIn());
         }
+
 
         isShooting = false;
     }
+
 }
