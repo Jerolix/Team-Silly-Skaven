@@ -10,12 +10,13 @@ public class crossBow : MonoBehaviour
     [SerializeField] private bool canFire;
     [SerializeField] private Animator bowAnimator;
     public AudioSource audioSource;
-    public AudioClip crossbowV2Shoot;
+    public AudioClip CrossbowV2Shoot;
+    public AudioClip CrossbowV2Reload;
 
     private void Start()
     {
 
-        audioSource = gameObject.GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
 
         if (canFire == false)
         {
@@ -44,7 +45,7 @@ public class crossBow : MonoBehaviour
                 var Bolt = Instantiate(boltPrefab, boltSpawnPoint.position, boltSpawnPoint.rotation);//gets the bolt to appear and where it should appear, the origin point of the crossbow
                 Bolt.GetComponent<Rigidbody>().velocity = boltSpawnPoint.forward * boltSpeed; //get bolt to move.
 
-                audioSource.Play();
+                audioSource.PlayOneShot(CrossbowV2Shoot, 1.0f);
 
                 StartCoroutine(Cooldown());
             }
@@ -54,6 +55,7 @@ public class crossBow : MonoBehaviour
 
     IEnumerator Cooldown()
     {
+        audioSource.PlayOneShot(CrossbowV2Reload, 1.0f);
         print("RETRACTING");
         bowAnimator.SetTrigger("Retracting");
         yield return new WaitForSeconds(1.25f);
