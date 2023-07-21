@@ -34,6 +34,7 @@ public class FPSMovement : MonoBehaviour
 
     public AudioSource walkSound;
     public AudioSource sprintSound;
+    public AudioSource landSound;
 
     public AudioSource clockBell;
 
@@ -166,6 +167,7 @@ public class FPSMovement : MonoBehaviour
             if (m_isGrounded == true)
             {
                 m_velocity.y = Mathf.Sqrt(m_jumpHeight * -2f * m_gravity);
+                StartCoroutine(PlayLandSound());
             }
         }
 
@@ -182,6 +184,22 @@ public class FPSMovement : MonoBehaviour
         }
 
         return isGrounded;
+    }
+
+    IEnumerator PlayLandSound()
+    {
+        yield return new WaitForSeconds(0.1f);
+        while (true)
+        {
+            yield return new WaitForSeconds(0.01f);
+
+            if (m_isGrounded == true )
+            {
+                landSound.pitch = Random.Range(0.7f, 1.3f);
+                landSound.Play();
+                break;
+            }
+        }
     }
 
     void OnTriggerEnter(Collider col)
