@@ -19,6 +19,7 @@ public class StartGame : MonoBehaviour
 
     IEnumerator coroutineA()
     {
+        clickSound.Play();
         fadeScreenController.SetTrigger("FadeBlack");
         yield return new WaitForSeconds(1.0f);
         SceneManager.LoadScene("SampleScene");
