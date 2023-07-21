@@ -191,7 +191,6 @@ public class FPSMovement : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         while (true)
         {
-            yield return new WaitForSeconds(0.01f);
 
             if (m_isGrounded == true )
             {
@@ -199,6 +198,7 @@ public class FPSMovement : MonoBehaviour
                 landSound.Play();
                 break;
             }
+            yield return new WaitForSeconds(0.01f);
         }
     }
 
