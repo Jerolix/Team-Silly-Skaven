@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MouseLook : MonoBehaviour
 {
-    public float m_sensitivity = 1f; // Mouse sensitivity
+    public float m_sensitivity = 2500f; // Mouse sensitivity
     public float m_clampAngle = 90f; // Limiting our vertical look angle
     public Transform m_playerObject; // Stores the transform of the player container
     public Transform m_camera; // Stores the transform of the camera
@@ -29,8 +29,8 @@ public class MouseLook : MonoBehaviour
 
     private void GetMousePos()
     {
-        m_mousePos.x = Input.GetAxis("Mouse X") * m_sensitivity * Time.deltaTime; 
-        m_mousePos.y = Input.GetAxis("Mouse Y") * m_sensitivity * Time.deltaTime;
+        m_mousePos.x = (Input.GetAxis("Mouse X") * m_sensitivity) * Time.deltaTime; 
+        m_mousePos.y = (Input.GetAxis("Mouse Y") * m_sensitivity) * Time.deltaTime;
        // Debug.Log(m_mousePos);
     }
 

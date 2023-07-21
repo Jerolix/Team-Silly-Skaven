@@ -23,10 +23,10 @@ public class hitCounter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (scoreText.text != "Targets Hit: " + targetsHit + "/17")
+        if (scoreText.text != "Targets Hit: " + targetsHit + "/" + maxTargets)
         {
             counterAnimator.SetTrigger("ValueChanged");
-            scoreText.text = "Targets Hit: " + targetsHit + "/17";
+            scoreText.text = "Targets Hit: " + targetsHit + "/" + maxTargets;
         }
     }
 
