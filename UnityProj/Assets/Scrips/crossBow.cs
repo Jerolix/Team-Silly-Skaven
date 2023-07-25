@@ -60,7 +60,7 @@ public class crossBow : MonoBehaviour
         audioSource.PlayOneShot(CrossbowV2Reload, 1.0f);
         print("RETRACTING");
         bowAnimator.SetTrigger("Retracting");
-        yield return new WaitForSeconds(1.25f);
+        yield return new WaitForSeconds(1f);
         //bowAnimator.SetTrigger("Idle");
         canFire = true;
     }
